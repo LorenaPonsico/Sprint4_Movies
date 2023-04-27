@@ -14,25 +14,30 @@ function getMoviesFromDirector(movies, director) {
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(movies, director) {
-  const moviesXDirector = getMoviesFromDirector(movies, director); 
+  const moviesXDirector = getMoviesFromDirector(movies, director);
   const sumaScore = moviesXDirector.reduce((acumulador, movie) => {
     return acumulador += movie.score;
   }, 0);
-  
-  const notaMedia = Number((sumaScore / moviesXDirector.length).toFixed(2));
-  return notaMedia;
+
+  const averageNote = Number((sumaScore / moviesXDirector.length).toFixed(2));
+  return averageNote;
 }
 
 // Exercise 4:  Alphabetic order by title 
 function orderAlphabetically(movies) {
-  const moviesFiltered = movies.map((name) => name.title);
-  const moviesOrder = moviesFiltered.sort().slice(0,20);
-  return moviesOrder
+  const moviesFilteredByTitle = movies.map((name) => name.title);
+  const orderMovies = moviesFilteredByTitle.sort().slice(0, 20); // sort ordena y slice muestra en este caso de la posicion 0 al 20 del array
+  return orderMovies
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear() {
-
+function orderByYear(array) {
+  const copyArray = [...array]; // copia del array
+  return copyArray.sort((a, b) => {
+    const yearOrder = a.year - b.year;
+    const newArrayOrder = yearOrder || a.title.localeCompare(b.title);
+    return newArrayOrder
+  });
 }
 
 // Exercise 6: Calculate the average of the movies in a category

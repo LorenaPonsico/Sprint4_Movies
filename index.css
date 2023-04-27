@@ -1,0 +1,8 @@
+#listaDirectores {
+    display: none;
+  }
+  
+  /* Estilos para mostrar la lista de directores cuando el botón está activo */
+  #showDirectors:checked ~ #listaDirectores {
+    display: block;
+  }

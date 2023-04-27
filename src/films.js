@@ -1,15 +1,12 @@
 // Exercise 1: Get the array of all directors.
-
 function getAllDirectors(movies) {
   const result = movies.map((name) => name.director); // funcion map sobre el array de objetos busca y devuelve un array nuevo (no modifica original) con lo que le pidas (en este caso el nombre de directores) 
   // console.log(result) //para ver el resultado por consola
   return result; // cuando llame a la funcion devolvere el resultado
 }
 
-
 // Exercise 2:
 // Get the films of a certain director
-
 function getMoviesFromDirector(movies, director) {
   const result = movies.filter((movie) => movie.director === director);
   return result;
@@ -27,8 +24,10 @@ function moviesAverageOfDirector(movies, director) {
 }
 
 // Exercise 4:  Alphabetic order by title 
-function orderAlphabetically(array) {
-
+function orderAlphabetically(movies) {
+  const moviesFiltered = movies.map((name) => name.title);
+  const moviesOrder = moviesFiltered.sort().slice(0,20);
+  return moviesOrder
 }
 
 // Exercise 5: Order by year, ascending

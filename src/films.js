@@ -33,16 +33,26 @@ function orderAlphabetically(movies) {
 // Exercise 5: Order by year, ascending
 function orderByYear(array) {
   const copyArray = [...array]; // copia del array
-  return copyArray.sort((a, b) => {
+  return copyArray.sort((a, b) => { //aplico sort para ordenar los objetos
     const yearOrder = a.year - b.year;
-    const newArrayOrder = yearOrder || a.title.localeCompare(b.title);
+    const newArrayOrder = yearOrder || a.title.localeCompare(b.title); //  localCompare se utiliza para comparar los títulos y determinar su orden alfabético.
     return newArrayOrder
   });
 }
 
 // Exercise 6: Calculate the average of the movies in a category
-function moviesAverageByCategory() {
+function moviesAverageByCategory(movies, genre) {
 
+  const moviesXGenre = movies.filter((movie) => movie.genre.includes(genre) && movie.score != '');
+
+  const sumScoreXGenre = moviesXGenre.reduce((acumulador, movie) => {
+    acumulador += movie.score;
+    return acumulador;
+  }, 0);
+
+  const lenghtOfFilmsXGenre = Number(moviesXGenre.length);
+  const averageScoreXGenre = Number((sumScoreXGenre / lenghtOfFilmsXGenre).toFixed(2));
+  return averageScoreXGenre;
 }
 
 // Exercise 7: Modify the duration of movies to minutes

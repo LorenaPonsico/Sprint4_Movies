@@ -1,32 +1,32 @@
 // Exercise 1: Get the array of all directors.
 function getAllDirectors(movies) {
-  const result = movies.map((name) => name.director); // funcion map sobre el array de objetos busca y devuelve un array nuevo (no modifica original) con lo que le pidas (en este caso el nombre de directores) 
-  // console.log(result) //para ver el resultado por consola
-  return result; // cuando llame a la funcion devolvere el resultado
+  const newArrayAllDirectors = movies.map((name) => name.director); // funcion map sobre el array de objetos original busca y devuelve un array nuevo (no modifica original) con lo que le pidas (en este caso el nombre de directores) 
+  // const newArrayAllDirectors = movies.map(function (name){ return name.director}); // funcion map clasica sin arrow function
+  return newArrayAllDirectors; // cuando llame a la funcion devolvere el resultado
 }
 
 // Exercise 2:
 // Get the films of a certain director
 function getMoviesFromDirector(movies, director) {
-  const result = movies.filter((movie) => movie.director === director);
-  return result;
+  const newArrayMoviesXDirector = movies.filter((movie) => movie.director.includes(director)); // funcion filter devuelve un nuevo array filtrado con una condicion que le pasamos 
+  return newArrayMoviesXDirector;
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(movies, director) {
   const moviesXDirector = getMoviesFromDirector(movies, director);
-  const sumaScore = moviesXDirector.reduce((acumulador, movie) => {
-    return acumulador += movie.score;
-  }, 0);
+  const sumaScore = moviesXDirector.reduce((valorAcumulado, movie) => {
+    return valorAcumulado += movie.score
+  }, 0); // el metodo reduce va sumando los valores, 0 es la posicion por donde empieza a contar
 
-  const averageNote = Number((sumaScore / moviesXDirector.length).toFixed(2));
-  return averageNote;
+  const averageNoteXDirector = Number((sumaScore / moviesXDirector.length).toFixed(2));
+  return averageNoteXDirector;
 }
 
 // Exercise 4:  Alphabetic order by title 
 function orderAlphabetically(movies) {
   const moviesFilteredByTitle = movies.map((name) => name.title);
-  const orderMovies = moviesFilteredByTitle.sort().slice(0, 20); // sort ordena y slice muestra en este caso de la posicion 0 al 20 del array
+  const orderMovies = moviesFilteredByTitle.sort().slice(0, 20); // sort ordena el array y slice muestra en este caso de la posicion 0 al 20 del array
   return orderMovies
 }
 
@@ -42,16 +42,14 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(movies, genre) {
-
   const moviesXGenre = movies.filter((movie) => movie.genre.includes(genre) && movie.score != '');
-
   const sumScoreXGenre = moviesXGenre.reduce((acumulador, movie) => {
     acumulador += movie.score;
     return acumulador;
   }, 0);
 
-  const lenghtOfFilmsXGenre = Number(moviesXGenre.length);
-  const averageScoreXGenre = Number((sumScoreXGenre / lenghtOfFilmsXGenre).toFixed(2));
+  const lenghtOfMoviesXGenre = Number(moviesXGenre.length);
+  const averageScoreXGenre = Number((sumScoreXGenre / lenghtOfMoviesXGenre).toFixed(2));
   return averageScoreXGenre;
 }
 

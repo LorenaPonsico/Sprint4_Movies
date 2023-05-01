@@ -31,8 +31,8 @@ function orderAlphabetically(movies) {
 }
 
 // Exercise 5: Order by year, ascending
-function orderByYear(array) {
-  const copyArray = [...array]; // copia del array
+function orderByYear(movies) {
+  const copyArray = movies.map((movie) => ({ ...movie })); // copia del array
   return copyArray.sort((a, b) => { //aplico sort para ordenar los objetos
     const yearOrder = a.year - b.year;
     const newArrayOrder = yearOrder || a.title.localeCompare(b.title); //  localCompare se utiliza para comparar los títulos y determinar su orden alfabético.
@@ -42,22 +42,22 @@ function orderByYear(array) {
 
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory(movies, genre) {
-  const moviesXGenre = movies.filter((movie) => movie.genre.includes(genre) && movie.score != '');
-  const sumScoreXGenre = moviesXGenre.reduce((acumulador, movie) => {
+  const moviesXGenre = movies.filter((movie) => movie.genre.includes(genre) && movie.score != ''); //hago un filtro de las peliculas por genero y que contengan puntuacion 
+  const sumScoreXGenre = moviesXGenre.reduce((acumulador, movie) => { // con el reduce sumo todas las puntuaciones desde la posicion 0
     acumulador += movie.score;
     return acumulador;
   }, 0);
 
-  const lenghtOfMoviesXGenre = Number(moviesXGenre.length);
-  const averageScoreXGenre = Number((sumScoreXGenre / lenghtOfMoviesXGenre).toFixed(2));
-  return averageScoreXGenre;
+  const lenghtOfMoviesXGenre = Number(moviesXGenre.length); // cojo la cantidad de posiciones del array (cantidad de peliculas)
+  const averageScoreXGenre = Number((sumScoreXGenre / lenghtOfMoviesXGenre).toFixed(2)); // divido la suma de las puntuaciones entre el total de peliculas y limito a 2 decimales
+  return averageScoreXGenre; // devuelvo la media por genero
 }
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-  const arrayDurationInMinuts = array.map((movies) => ({ ...movies }));
+  const arrayDurationInMinuts = array.map((movies) => ({ ...movies })); // copia del array
 
-  arrayDurationInMinuts.forEach((movie) => {
+  arrayDurationInMinuts.forEach((movie) => { //recorro la copia del array y por cada pelicula entraigo la duracion, para poder modificar las horas y convertir y sumar los minutos
     let duration = movie.duration;
     let hours = Number(duration.match(/\d+(?=h)/g));
     let minutes = Number(duration.match(/\d+(?=min)/g));
@@ -69,8 +69,12 @@ function hoursToMinutes(array) {
 
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
+function bestFilmOfYear(movies, year) {
+  const newArrayOfMovies = movies.map((movie) => ({ ...movie })); // copia del array
+  const filterXYear = newArrayOfMovies.filter((date) => date.year === year) // filtra cada pelicula por año
+  const orderXScore = filterXYear.sort((a, b) => b.score - a.score) // ordena, la primera posicion del array es el numero mas alto
 
+  return [orderXScore[0]] // devuelto pa primera posicion del array, porque solo quiero mostrar la mejor pelicula
 }
 
 
